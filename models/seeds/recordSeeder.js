@@ -1,9 +1,6 @@
-const mongoose = require('mongoose')
+const db = require('../../config/mongoose')
 const Record = require('../record')
 const { recordSeeds } = require('./seed.json')
-mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
 
 db.once('open', () => {
     Record.create(recordSeeds)

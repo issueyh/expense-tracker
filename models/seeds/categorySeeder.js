@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
+const db = require('../../config/mongoose')
 const Category = require('../category')
 const { categorySeeds } = require('./seed.json')
-mongoose.connect('mongodb://localhost/expense-tracker', { useNewUrlParser: true, useUnifiedTopology: true })
 
 db.once('open', () => {
     Category.create(categorySeeds)
