@@ -1,12 +1,25 @@
-// 引用 Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
-// 引用 record model
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-// 定義首頁路由
+const { takeDate } = require('../../public/javascripts/takeDate')
+
 router.get('/', (req, res) => {
-    res.render('index')
+    Promise.all([Record.find().lean(), Category.find().lean()])
+        .then(results => {
+            const [records, categories] = results
+            let totalAmount = records.reduce((sum, record) => sum += record.amount, 0)
+            records.forEach(record => {
+                categories.find(category => {
+                    if (category.name === record.category) {
+                        record.icon = category.icon
+                        record.date = takeDate(record.date)
+                    }
+                })
+            })
+            res.render('index', {records, categories, totalAmount})
+        })
+        .catch(err => console.log(err))
 })
-// 匯出路由模組
+
 module.exports = router
