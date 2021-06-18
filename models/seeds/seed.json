@@ -1,0 +1,61 @@
+{
+    "recordSeeds": [
+        {
+            "name": "買口罩",
+            "category": "housewares",
+            "date": "2021-05-08",
+            "amount": 250
+        },
+        {
+            "name": "搭捷運",
+            "category": "transportation",
+            "date": "2021-05-09",
+            "amount": 70
+        },
+        {
+            "name": "YT會員",
+            "category": "entertainment",
+            "date": "2021-05-15",
+            "amount": 75
+        },
+        {
+            "name": "MINI雞塊",
+            "category": "food",
+            "date": "2021-05-16",
+            "amount": 135
+        },
+        {
+            "name": "線上課程分期付款",
+            "category": "others",
+            "date": "2021-05-21",
+            "amount": 6300
+        }
+    ],
+    "categorySeeds": [
+        {
+            "name": "housewares",
+            "name_cn": "家居物業",
+            "icon": "fas fa-home"
+        },
+        {
+            "name": "transportation",
+            "name_cn": "交通出行",
+            "icon": "fas fa-shuttle-van"
+        },
+        {
+            "name": "entertainment",
+            "name_cn": "休閒娛樂",
+            "icon": "fas fa-grin-beam"
+        },
+        {
+            "name": "food",
+            "name_cn": "餐飲食品",
+            "icon": "fas fa-utensils"
+        },
+        {
+            "name": "others",
+            "name_cn": "其他",
+            "icon": "fas fa-pen"
+        }
+    ]
+}
