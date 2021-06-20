@@ -38,7 +38,7 @@
                         <div class="col-8 d-flex justify-content-between">
                             <div class="col-1 d-flex align-items-center justify-content-center mx-3"
                                 style="opacity: 0.7; color:tomato;">
-                                <i class="{{ this.icon }} fa-3x"></i>
+                                <i class="{{ this.icon }} fa-2x"></i>
                             </div>
                             <div class="col-6">
                                 <p style="font-weight: bold; font-size: 20px;">{{ this.name }}</p>
@@ -50,9 +50,8 @@
                             </div>
                         </div>
                         <div class="col-4 d-flex justify-content-end">
-                            <button type="button" class="col-5 btn btn-success my-auto" data-toggle="modal"
-                                data-target="#editModal">
-                                編輯
+                            <button type="button" class="col-5 btn btn-success my-auto">
+                                <a href="/records/{{ this._id }}/edit" class="text-light" style="text-decoration: none;">編輯</a>
                             </button>
 
                             <button type="button" class="col-5 btn btn-danger mx-3 my-auto" data-toggle="modal"

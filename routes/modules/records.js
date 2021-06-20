@@ -34,4 +34,39 @@ router.post('/', [
         }).catch(err => console.log(err))
 })
 
+router.get('/:id/edit', (req, res) => {
+    const id = req.params.id
+    Record.findById(id)
+        .lean()
+        .then(record => res.render('edit', { record }))
+        .catch(err => console.error(err))
+})
+router.put('/:id', [
+    check('name').trim().isLength({ min: 1 }).withMessage('名稱不可為空白，請重新輸入!'),
+    check('date').isISO8601().toDate().withMessage('請照格式選擇日期!'),
+    check('category').trim().isLength({ min: 1 }).withMessage('請選擇支出類別'),
+    check('amount').isInt({ allow_leading_zeroes: false, min: 1 }).withMessage('支出金額有誤，請重新輸入!')
+], handleErrorFunc, (req, res) => {
+    const id = req.params.id
+    const { name, category, date, amount } = req.body
+    Category.find({ name: category })
+        .lean()
+        .then(() => {
+            if (!name || !category || !date || !amount) {
+                return res.redirect('/records/${id}/edit')
+            } else {
+                return Record.findById(id)
+                    .then(record => {
+                        record.name = name
+                        record.date = date
+                        record.category = category
+                        record.amount = amount
+                        return record.save()
+                    })
+                    .then(() => res.redirect('/'))
+                    .catch(err => console.log(err))
+            }
+        }).catch(err => console.log(err))
+})
+
 module.exports = router
