@@ -1,8 +1,37 @@
 const express = require('express')
+const { check } = require('express-validator')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
+const { handleErrorFunc } = require('../../public/javascripts/handleErrorFunc')
 // 準備引入路由模組
 
+router.get('/create', (req, res) => {
+    return res.render('create')
+})
+router.post('/', [
+    check('name').trim().isLength({ min: 1 }).withMessage('名稱不可為空白，請重新輸入!'),
+    check('date').isISO8601().toDate().withMessage('請照格式選擇日期!'),
+    check('category').trim().isLength({ min: 1 }).withMessage('請選擇支出類別'),
+    check('amount').isInt({ allow_leading_zeroes: false, min: 1 }).withMessage('支出金額有誤，請重新輸入!')
+], handleErrorFunc, (req, res) => {
+    const { name, category, date, amount } = req.body
+    Category.find({ name: category })
+        .lean()
+        .then(() => {
+            if (!name || !category || !date || !amount) {
+                return res.redirect('/records/create')
+            } else {
+                return Record.create({
+                    name,
+                    category,
+                    date,
+                    amount
+                })
+                    .then(() => res.redirect('/'))
+                    .catch(err => console.log(err))
+            }
+        }).catch(err => console.log(err))
+})
 
 module.exports = router

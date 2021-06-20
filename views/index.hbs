@@ -17,11 +17,11 @@
                 </div>
             </form>
             <div class="row col-10">
-                <div class="col-8 d-flex justify-content-between mx-auto">
+                <div class="d-flex justify-content-between mx-auto">
                     <div class="col-5">
-                        <p class="ml-3 mt-3" style="font-size: 2vw;">總金額：</p>
+                        <p class="ml-3 mt-5" style="font-size: 1vw;">總金額：</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-5">
                         <p class="mt-1" style="font-size: 3vw;" id="totalAmount">${{totalAmount}}</p>
                     </div>
                 </div>
@@ -36,7 +36,8 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-8 d-flex justify-content-between">
-                            <div class="col-1 d-flex align-items-center justify-content-center mx-3" style="opacity: 0.7; color:tomato;">
+                            <div class="col-1 d-flex align-items-center justify-content-center mx-3"
+                                style="opacity: 0.7; color:tomato;">
                                 <i class="{{ this.icon }} fa-3x"></i>
                             </div>
                             <div class="col-6">
@@ -63,6 +64,13 @@
                 </li>
             </div>
             {{/each}}
+            <div class="col-10">
+                <div class="row justify-content-center">
+                    <button type="button" class="btn col-4 btn-warning btn-outline-dark my-5">
+                        <a href="/records/create" style="text-decoration:none;">新增支出</a>
+                    </button>
+                </div>
+            </div>
         </div>
     </ul>
 </div>
