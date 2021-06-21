@@ -1,15 +1,9 @@
 module.exports = {
-    takeDate: (date) => {
+    takeDate: function (date) {
         const dateStr = new Date(date)
         const year = dateStr.getFullYear()
-        const month = dateStr.getMonth() + 1
-        const day = dateStr.getDate()
-        if (day < 10) {
-            day = '0' + day
-        }
-        if (month < 10) {
-            month = '0' + month
-        }
+        const month = ('0' + dateStr.getMonth() + 1).slice(-2)
+        const day = ('0' + dateStr.getDate()).slice(-2)
         return `${year}-${month}-${day}`
     }
 }
