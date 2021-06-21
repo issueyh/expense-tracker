@@ -54,10 +54,30 @@
                                 <a href="/records/{{ this._id }}/edit" class="text-light" style="text-decoration: none;">編輯</a>
                             </button>
 
-                            <button type="button" class="col-5 btn btn-danger mx-3 my-auto" data-toggle="modal"
-                                data-target="#deleteModal">
+                            <button type="button" class="col-5 btn btn-danger mx-3 my-auto" data-toggle="modal" data-target="#deleteModal{{ this._id }}" data-id="{{ this._id }}">
                                 刪除
                             </button>
+
+                            {{!-- modal delete --}}
+                            <div class="modal fade" id="deleteModal{{ this._id }}" tabindex="-1" role="dialog" aria-labelledby="deleteCheckBox"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <p>確定刪除<strong id="delete-name">{{ this.name }}</strong><strong id="delete-amount">${{ this.amount }}</strong>的支出?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                            <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                                                <button type="submit" class="btn btn-danger">刪除</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </li>
