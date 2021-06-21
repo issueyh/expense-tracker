@@ -4,6 +4,7 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 const { handleErrorFunc } = require('../../public/javascripts/handleErrorFunc')
+const { takeDate } = require('../../public/javascripts/takeDate')
 // 準備引入路由模組
 
 router.get('/create', (req, res) => {
