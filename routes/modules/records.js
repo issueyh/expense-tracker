@@ -4,6 +4,7 @@ const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
 const { handleErrorFunc } = require('../../public/javascripts/handleErrorFunc')
+const { takeDate } = require('../../public/javascripts/takeDate')
 
 router.get('/create', (req, res) => {
     return res.render('create')
@@ -81,14 +82,16 @@ router.get('/filter', (req, res) => {
     Promise.all([Record.find({ category: { $regex: filteredCategory } }).lean().sort('-date'), Category.find().lean()])
         .then(results => {
             const [records, categories] = results
+            let totalAmount = records.reduce((sum, record) => sum += record.amount, 0)
             records.forEach(record => {
                 categories.find(category => {
                     if (category.name === record.category) {
                         record.icon = category.icon
+                        record.date = takeDate(record.date)
                     }
                 })
             })
-            res.render('index', { records: filteredCategory, categories })
+            res.render('index', { records, categories, filteredCategory, totalAmount })
         })
         .catch(err => console.log(err))
 })
