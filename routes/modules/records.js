@@ -77,4 +77,22 @@ router.delete('/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
+router.get('/filter', (req, res) => {
+    const { filteredCategory } = req.query
+    Promise.all([Record.find({ category: { $regex: filteredCategory } }).lean().sort('-date'), Category.find().lean()])
+        .then(results => {
+            const [records, categories] = results
+            records.forEach(record => {
+                categories.find(category => {
+                    if (category.name === record.category) {
+                        record.icon = category.icon
+                        record.date = takeDate(record.date)
+                    }
+                })
+            })
+            res.render('index', { records, categories })
+        })
+        .catch(err => console.log(err))
+})
+
 module.exports = router
