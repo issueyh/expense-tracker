@@ -1,0 +1,10 @@
+.invalid-feedback {
+  display: none;
+  font-size: 0.8em;
+}
+.invalid-feedback {
+  color: red
+}
+form.was-validated .form-control:invalid ~ .invalid-feedback {
+  display: initial;   /* 顯示 */
+}
