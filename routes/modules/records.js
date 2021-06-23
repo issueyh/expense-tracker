@@ -5,7 +5,6 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 const { handleErrorFunc } = require('../../public/javascripts/handleErrorFunc')
 const { takeDate } = require('../../public/javascripts/takeDate')
-
 router.get('/create', (req, res) => {
     return res.render('create')
 })
@@ -36,9 +35,13 @@ router.post('/', [
 
 router.get('/:id/edit', (req, res) => {
     const id = req.params.id
-    Record.findById(id)
-        .lean()
-        .then(record => res.render('edit', { record }))
+    Promise.all([Record.findById(id).lean(), Category.find().lean()])
+        .then(results => {
+            const [record, categories] = results
+            record.date = takeDate(record.date)
+            const category = record.category
+            res.render('edit', { record, category, categories })
+        })
         .catch(err => console.error(err))
 })
 router.put('/:id', [
