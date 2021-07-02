@@ -20,5 +20,8 @@
     "just-handlebars-helpers": "^1.0.18",
     "method-override": "^3.0.0",
     "mongoose": "^5.12.14"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
   }
 }

@@ -5,9 +5,11 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 const { handleErrorFunc } = require('../../public/javascripts/handleErrorFunc')
 const { takeDate } = require('../../public/javascripts/takeDate')
+
 router.get('/create', (req, res) => {
     return res.render('create')
 })
+
 router.post('/', [
     check('name').trim().isLength({ min: 1 }).withMessage('名稱不可為空白，請重新輸入!'),
     check('date').isISO8601().toDate().withMessage('請照格式選擇日期!'),
@@ -44,6 +46,7 @@ router.get('/:id/edit', (req, res) => {
         })
         .catch(err => console.error(err))
 })
+
 router.put('/:id', [
     check('name').trim().isLength({ min: 1 }).withMessage('名稱不可為空白，請重新輸入!'),
     check('date').isISO8601().toDate().withMessage('請照格式選擇日期!'),

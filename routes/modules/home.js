@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     Promise.all([Record.find().lean(), Category.find().lean()])
         .then(results => {
             const [records, categories] = results
-            let totalAmount = records.reduce((sum, record) => sum += record.amount, 0)
+            const totalAmount = records.reduce((sum, record) => sum += record.amount, 0)
             records.forEach(record => {
                 categories.find(category => {
                     if (category.name === record.category) {
